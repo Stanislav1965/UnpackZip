@@ -24,17 +24,11 @@ public class Main {
                 destDir.mkdir();
             }
             ZipEntry entry;
-            String name;
+
             while ((entry = zin.getNextEntry()) != null) {
-                String fileName = null;
-                String filePath = entry.getName();
-                int lastPath = filePath.lastIndexOf(File.separator);
-                if (lastPath != -1) {
-                    fileName = filePath.substring(lastPath + 1);
-                }
-                String filePathDest = destDir + File.separator + fileName;
+                String fileWithPath = destDirectory + File.separator + entry.getName();
                 if (!entry.isDirectory()) {
-                    FileOutputStream fout = new FileOutputStream(filePathDest);
+                    FileOutputStream fout = new FileOutputStream(fileWithPath);
                     for (int c = zin.read(); c != -1; c = zin.read()) {
                         fout.write(c);
                     }
